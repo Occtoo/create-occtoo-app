@@ -17,12 +17,6 @@
   Get started by running <code>npx create-occtoo-app</code>
 </p>
 
-<div align="center">
-
-[![NPM version][npm-image]][npm-url]
-
-</div>
-
 ## Table of contents
 
 - <a href="#about">Occtoo</a>
@@ -56,12 +50,16 @@ npx create-occtoo-app
 
 Next.js is a React framework that enables server-side rendering and generating static websites. It also provides a great developer experience with features like hot module reloading, automatic code splitting, and more.
 
+[Next.js docs](https://nextjs.org/docs)
+
 ### Vite
 
 Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
 
 - A dev server that serves your source files over native ES modules, with rich built-in features and astonishingly fast Hot Module Replacement (HMR).
 - A build command that bundles your code with Rollup, pre-configured to output highly optimized static assets for production.
+
+[Vite docs](https://vitejs.dev/guide/)
 
 #### Packages
 
