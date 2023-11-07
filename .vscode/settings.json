@@ -1,0 +1,18 @@
+{
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": false,
+  "prettier.trailingComma": "all",
+  "editor.rulers": [100],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
