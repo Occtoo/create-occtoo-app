@@ -74,7 +74,7 @@ const main = async () => {
   await installDependencies({ projectDir: destination });
 
   // run codegen
-  spinner.text = "Running codegen...";
+  spinner.text = "Generating types...";
   await runCodegen({ projectDir: destination });
 
   spinner.succeed(
