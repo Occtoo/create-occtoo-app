@@ -68,3 +68,4 @@ The packages used in the templates are:
 - [TypeScript](https://typescriptlang.org) for type safety
 - [Tailwind CSS](https://tailwindcss.com) for styling
 - [Tanstack Query](https://tanstack.com/query/latest) for data fetching
+- [OpenAPI Typescript Codegen](https://github.com/ferdikoomen/openapi-typescript-codegen) for generating types from OpenAPI specs
