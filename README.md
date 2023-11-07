@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://www.occtoo.com/hs-fs/hubfs/Logo-Occtoo-dark.png?width=125&height=20&name=Logo-Occtoo-dark.png">
-  <img src="https://www.occtoo.com/hs-fs/hubfs/Logo-Occtoo-dark.png?width=125&height=20&name=Logo-Occtoo-dark.png" width="200" alt="Occtoo Logo">
+  <source media="(prefers-color-scheme: dark)" srcset="https://6519008.fs1.hubspotusercontent-na1.net/hub/6519008/hubfs/Logo-Occtoo-white.png?width=200&height=80&name=Logo-Occtoo-white.png">
+  <img src="https://www.occtoo.com/hs-fs/hubfs/Logo-Occtoo-dark.png?width=200&height=80&name=Logo-Occtoo-dark.png" width="200" alt="Occtoo Logo">
 </picture>
 </p>
 
