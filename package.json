@@ -1,12 +1,18 @@
 {
   "name": "@occtoo/create-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scaffold a typesafe app using Occtoo as a data service",
-  "exports": "./dist/index.js",
-  "bin": "./dist/index.js",
+  "author": "Occtoo (https://occtoo.com)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Occtoo/create-occtoo-app.git"
+  },
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": "./dist/index.js",
+  "engines": {
+    "node": ">=18.17.0"
   },
   "keywords": [
     "occtoo",
@@ -18,10 +24,13 @@
     "react-query",
     "tanstack-query"
   ],
-  "type": "module",
-  "engines": {
-    "node": ">=18.17.0"
-  },
+  "files": [
+    "dist",
+    "template",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "typecheck": "tsc",
     "build": "tsup",
@@ -37,15 +46,6 @@
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --write",
     "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --check"
   },
-  "files": [
-    "dist",
-    "template",
-    "README.md",
-    "LICENSE",
-    "package.json"
-  ],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@types/eslint": "^8.37.0",
