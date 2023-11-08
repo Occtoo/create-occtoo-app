@@ -4,6 +4,7 @@ import chalk from "chalk";
 import fse from "fs-extra";
 import ora from "ora";
 import path from "path";
+import { updateJson } from "./helpers/updateJson.js";
 import { installDependencies } from "./helpers/installDependencies.js";
 import { runCodegen } from "./helpers/runCodegen.js";
 import { PKG_ROOT, ASCII_LOGO } from "./consts.js";
@@ -39,7 +40,7 @@ const main = async () => {
   });
 
   const destinationUrl = await text({
-    message: "Enter Occtoo destination url:",
+    message: "Enter Occtoo destination OpenAPI url:",
     placeholder:
       "https://global.occtoo.com/<project>/<destination>/<version>/openapi",
     initialValue: "",
@@ -61,13 +62,16 @@ const main = async () => {
   await fse.copy(source, destination).catch((err) => console.error(err));
 
   // update package.json
-  const destinationApiDocsUrl = destinationUrl.toString().endsWith("openapi")
-    ? destinationUrl.toString()
-    : destinationUrl.toString() + "/openapi";
   const packageJsonPath = path.join(destination, "package.json");
-  const packageJson = await fse.readJson(packageJsonPath);
-  packageJson.scripts.codegen = `openapi --input ${destinationApiDocsUrl} --output ./src/generated`;
-  await fse.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+  await updateJson({
+    path: packageJsonPath,
+    properties: [
+      {
+        key: "scripts.codegen",
+        value: `openapi --input ${destinationUrl.toString()} --output ./src/generated`,
+      },
+    ],
+  });
 
   // install dependencies
   spinner.text = "Installing dependencies...";
