@@ -2,7 +2,7 @@
 
 import {
   HydrationBoundary as RQHydrate,
-  HydrationBoundaryProps,
+  type HydrationBoundaryProps,
 } from "@tanstack/react-query";
 
 function Hydrate(props: HydrationBoundaryProps) {

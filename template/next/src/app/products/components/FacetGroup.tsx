@@ -21,11 +21,7 @@ const FacetGroup: React.FC<IFacetGroup> = ({ header, facetKey, values }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  /**
-   * * Toggle filter value
-   * @param key
-   * @param value
-   */
+  //Toggle filter value
   const toggleFilter = useCallback(
     (key?: string, value?: string) => {
       const params = filterIsActive(searchParams, key || "", value || "")
@@ -37,11 +33,7 @@ const FacetGroup: React.FC<IFacetGroup> = ({ header, facetKey, values }) => {
     [searchParams, router],
   );
 
-  /**
-   * * Get filter count (available products for filter)
-   * @param key
-   * @returns Number of available products for filter
-   */
+  // Get filter count (available products for filter)
   const filterCount = (key: string | undefined) => {
     return (
       facets

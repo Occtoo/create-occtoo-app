@@ -1,23 +1,16 @@
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { type Filters } from "@/providers/FilterProvider";
+import { type ReadonlyURLSearchParams } from "next/navigation";
 
-/**
- * * Get filters from searchParams
- * @param searchParams
- */
+// Get filters from searchParams
 export const getFilters = (searchParams: ReadonlyURLSearchParams) => {
   const filter = searchParams.get("filter");
   if (filter) {
-    return JSON.parse(filter);
+    return JSON.parse(filter) as Filters;
   }
-  return {};
+  return null;
 };
 
-/**
- * * Remove filter value from searchParams
- * @param searchParams
- * @param key
- * @param value
- */
+// Remove filter value from searchParams
 export const removeFilterValue = (
   searchParams: ReadonlyURLSearchParams,
   key: string,
@@ -25,14 +18,14 @@ export const removeFilterValue = (
 ) => {
   const params = new URLSearchParams(searchParams);
   const filter = getFilters(searchParams);
-  const filterValues = filter[key];
+  const filterValues = filter && filter[key];
   const updatedFilter = {
     ...filter,
-    [key]: filterValues.filter((v: string) => v !== value),
+    [key]: filterValues?.filter((v: string) => v !== value),
   };
 
   // remove query if empty
-  if (updatedFilter[key].length === 0) {
+  if (updatedFilter && updatedFilter[key]?.length === 0) {
     delete updatedFilter[key];
   }
 
@@ -48,12 +41,7 @@ export const removeFilterValue = (
   return params;
 };
 
-/**
- * * Add filter value to searchParams
- * @param searchParams
- * @param key
- * @param value
- */
+// Add filter value to searchParams
 export const addFilterValue = (
   searchParams: ReadonlyURLSearchParams,
   key: string,
@@ -61,7 +49,7 @@ export const addFilterValue = (
 ) => {
   const params = new URLSearchParams(searchParams);
   const filter = getFilters(searchParams);
-  const filterValues = filter[key];
+  const filterValues = filter && filter[key];
   const updatedFilter = {
     ...filter,
     [key]: filterValues ? [...filterValues, value] : [value],
@@ -72,18 +60,13 @@ export const addFilterValue = (
   return params;
 };
 
-/**
- * * Check if filter is active
- * @param searchParams
- * @param key
- * @param value
- */
+// Check if filter is active
 export const filterIsActive = (
   searchParams: ReadonlyURLSearchParams,
   key: string,
   value: string,
 ) => {
   const filter = getFilters(searchParams);
-  const filterValues = filter[key];
+  const filterValues = filter && filter[key];
   return filterValues && filterValues.includes(value);
 };

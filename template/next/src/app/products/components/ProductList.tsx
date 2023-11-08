@@ -3,9 +3,9 @@
 import { AiOutlineLoading } from "react-icons/ai";
 import {
   DefaultService as OcctooDestinationClient,
-  productsApiResponse,
+  type productsApiResponse,
 } from "@/generated";
-import { IFilters, useFilter } from "@/providers/FilterProvider";
+import { type Filters, useFilter } from "@/providers/FilterProvider";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,15 +18,13 @@ export default function ProductList({
   filterQuery,
 }: {
   page: number;
-  filterQuery: IFilters | undefined;
+  filterQuery: Filters | undefined;
 }) {
   const router = useRouter();
   const { setFacets } = useFilter();
   const searchParams = useSearchParams();
 
-  /**
-   * Fetch products
-   */
+  // Fetch products
   const { data, isLoading, isError, isFetched, isFetching } =
     useQuery<productsApiResponse>({
       queryKey: ["products", page, filterQuery],
@@ -51,18 +49,16 @@ export default function ProductList({
   const [fetchedPages, setFetchedPages] = useState<number[]>([page]);
   const [isPrevousQuery, setIsPreviousQuery] = useState(false);
 
-  /**
-   * Reset page on filter change
-   */
+  const filterParams = searchParams.get("filter");
+
+  // Reset page on filter change
   useEffect(() => {
     // const filterQuery = new URLSearchParams(searchParams).get('filter');
     setProducts([]);
     setFetchedPages([page]);
-  }, [searchParams.get("filter")]);
+  }, [filterParams]);
 
-  /**
-   * Update products on data change
-   */
+  // Update products on data change
   useEffect(() => {
     if (data) {
       setFacets && data?.facets && setFacets(data.facets);
@@ -70,10 +66,7 @@ export default function ProductList({
     }
   }, [data, isFetched, isLoading, page, setFacets]);
 
-  /**
-   * * Update products
-   * @param productRes  Products response
-   */
+  // Update products
   const updateProducts = (productRes: productsApiResponse["results"]) => {
     if (page === 0) {
       setProducts(productRes);
@@ -98,9 +91,7 @@ export default function ProductList({
     setProducts(productRes);
   };
 
-  /**
-   * * Fetch more products
-   */
+  // Fetch more products
   const fetchMore = () => {
     setIsPreviousQuery(false);
     const nextPage = fetchedPages.includes(page + 1)
@@ -116,9 +107,7 @@ export default function ProductList({
     router.replace("/products" + "?" + params.toString(), { scroll: false });
   };
 
-  /**
-   * * Fetch previous products
-   */
+  // Fetch previous products
   const fetchPrevious = () => {
     setIsPreviousQuery(true);
     const previousPage = fetchedPages.includes(page - 1)
@@ -131,17 +120,13 @@ export default function ProductList({
     router.replace("/products" + "?" + params.toString(), { scroll: false });
   };
 
-  /**
-   * * Check if previous page is available
-   */
+  // Check if previous page is available
   const hasPreviousPage = () => {
     const previousPage = fetchedPages[0] === 1 ? 1 : fetchedPages[0] - 1;
     return page > 1 && !fetchedPages.includes(previousPage);
   };
 
-  /**
-   * * Check if next page is available
-   */
+  // Check if next page is available
   const hasNextPage = () => {
     const totalProducts = data?.total || 0;
     const numberOfPages = Math.ceil(totalProducts / PAGE_SIZE);

@@ -1,6 +1,6 @@
 "use client";
 
-import { productsApiResponse } from "@/generated";
+import { type productsApiResponse } from "@/generated";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";

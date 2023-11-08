@@ -4,16 +4,16 @@ import { dehydrate } from "@tanstack/react-query";
 import ProductList from "./components/ProductList";
 import {
   DefaultService as OcctooDestinationClient,
-  productsApiResponse,
+  type productsApiResponse,
 } from "@/generated";
 import ProductFilter from "./components/ProductFilter";
-import { Metadata, ResolvingMetadata } from "next";
+import { type Metadata, type ResolvingMetadata } from "next";
 import { Suspense } from "react";
 import { PAGE_SIZE } from "./constants";
 
-type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface Props {
+  searchParams: Record<string, string[]>;
+}
 
 // Generate META data for SEO purposes
 export async function generateMetadata(
@@ -41,15 +41,7 @@ export default async function Page({ searchParams }: Props) {
       ? JSON.parse(searchParams.filter)
       : {};
 
-  /**
-   * Fetch products
-   * ? This is the same as in src/app/products/components/ProductList.tsx
-   * ? but we are using the client directly instead of the react-query hook
-   * ? to be able to use the prefetchQuery method
-   *
-   * ? This is needed to be able to use the ReactQueryHydrate component
-   * ? to hydrate the client with the data from the server
-   */
+  // Fetch products - hydrate client with data from server
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery<productsApiResponse>({
     queryKey: ["products", page, filter],

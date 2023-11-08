@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-type IFilters = Record<string, string[]>;
+type Filters = Record<string, string[]>;
 
 export interface IFacet {
   propertyId?: string | undefined;
@@ -16,7 +16,7 @@ export interface IFacet {
 interface IContext {
   staticFacets: IFacet[] | undefined;
   facets: IFacet[] | undefined;
-  filters: IFilters;
+  filters: Filters;
   setStaticFacets: (facets: IFacet[]) => void;
   setFacets: (facets: IFacet[]) => void;
   addFilter: (key: string, value: string) => void;
@@ -36,7 +36,7 @@ export const FilterProvider = ({ ...props }) => {
   const [facets, setFacets] = useState<IFacet[] | undefined>(undefined);
 
   // Filters (used for queries)
-  const [filters, setFilters] = useState<IFilters>({});
+  const [filters, setFilters] = useState<Filters>({});
 
   // Add filter
   const addFilter = (key: string, value: string) => {
