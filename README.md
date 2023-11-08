@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  Get started by running <code>npx create-occtoo-app</code>
+  Get started by running <code>npx @occtoo/create-app</code>
 </p>
 
 ## Table of contents
@@ -38,10 +38,18 @@ For more in-depth information about how to query a destination, please refer to 
 
 <h2 id="getting-started">Getting Started</h2>
 
-To scaffold an app using `create-occtoo-app`, run the command below and answer the command prompt questions:
+To scaffold an app, run one of the commands below and answer the command prompt questions:
 
 ```bash
-npx create-occtoo-app
+npx @occtoo/create-app
+```
+
+```bash
+bunx @occtoo/create-app
+```
+
+```bash
+pnpm dlx @occtoo/create-app
 ```
 
 <h2 id="templates">Templates</h2>

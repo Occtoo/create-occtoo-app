@@ -1,5 +1,5 @@
 {
-  "name": "create-occtoo-app",
+  "name": "@occtoo/create-app",
   "version": "1.0.0",
   "description": "Scaffold a typesafe app using Occtoo as a data service",
   "exports": "./dist/index.js",
