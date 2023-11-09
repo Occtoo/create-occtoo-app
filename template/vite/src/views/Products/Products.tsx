@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import {
-  DefaultService as OcctooDestinationClient,
-  type productsApiResponse,
-} from "@/generated";
 import { useQuery } from "@tanstack/react-query";
 import { useFilter } from "@/providers/FilterProvider";
 import { AiOutlineLoading } from "react-icons/ai";
 import ProductFilter from "./components/ProductFilter";
 import ProductCard from "./components/ProductCard";
+
+/**
+ * Import client generated from OpenAPI schema
+ *
+ * If you used a different destination url than the default one when scaffolding this project,
+ * you should switch out the types here to fix any type errors.
+ */
+import {
+  DefaultService as OcctooDestinationClient,
+  type productsApiResponse,
+} from "@/generated";
 
 // Pagination size
 const PAGE_SIZE = 16;
@@ -22,7 +29,12 @@ const Products = () => {
   // Products
   const [products, setProducts] = useState<productsApiResponse["results"]>([]);
 
-  // Fetch products
+  /**
+   * Use the generated client to fetch products
+   *
+   * If you used a different destination url than the default one when scaffolding this project,
+   * you should switch out the client function here.
+   */
   const { data, isLoading, isError, isRefetching } =
     useQuery<productsApiResponse>(
       ["products", page, filters],
@@ -67,7 +79,25 @@ const Products = () => {
   };
 
   // Handle error
-  if (isError) return <div>Error!</div>;
+  if (isError)
+    return (
+      <div className="text-xs p-4">
+        <p>
+          Oops. Something went wrong. Please check comments in &nbsp;
+          <code className="font-mono font-bold">
+            src/app/products/page.tsx
+          </code>{" "}
+          or open an issue on{" "}
+          <a
+            href="https://github.com/Occtoo/create-occtoo-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.
+          </a>
+        </p>
+      </div>
+    );
 
   // Render
   return (

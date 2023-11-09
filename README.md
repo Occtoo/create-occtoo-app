@@ -52,6 +52,12 @@ bunx @occtoo/create-app
 pnpm dlx @occtoo/create-app
 ```
 
+For demo purposes, you can use the following url when asked to provide an Occtoo Destination:
+
+```
+https://global.occtoo.com/occtoodemo/occtooFrontEndDocumentation/v3/openapi
+```
+
 <h2 id="templates">Templates</h2>
 
 ### Next.js

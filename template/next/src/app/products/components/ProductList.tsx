@@ -1,10 +1,6 @@
 "use client";
 
 import { AiOutlineLoading } from "react-icons/ai";
-import {
-  DefaultService as OcctooDestinationClient,
-  type productsApiResponse,
-} from "@/generated";
 import { type Filters, useFilter } from "@/providers/FilterProvider";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +8,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import { PAGE_SIZE } from "../constants";
+
+/**
+ * Import client generated from OpenAPI schema
+ *
+ * If you used a different destination url than the default one when scaffolding this project,
+ * you should switch out the types here to fix any type errors.
+ */
+import {
+  DefaultService as OcctooDestinationClient,
+  type productsApiResponse,
+} from "@/generated";
 
 export default function ProductList({
   page,
@@ -24,7 +31,12 @@ export default function ProductList({
   const { setFacets } = useFilter();
   const searchParams = useSearchParams();
 
-  // Fetch products
+  /**
+   * Use the generated client to fetch products
+   *
+   * If you used a different destination url than the default one when scaffolding this project,
+   * you should switch out the client function here.
+   */
   const { data, isLoading, isError, isFetched, isFetching } =
     useQuery<productsApiResponse>({
       queryKey: ["products", page, filterQuery],
@@ -134,7 +146,27 @@ export default function ProductList({
     return !isLastPage;
   };
 
-  if (isError) return <div>Error!</div>;
+  if (isError)
+    return (
+      <div>
+        <div className="z-10 max-w-5xl w-full items-center justify-between text-xs lg:flex">
+          <p className="justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl w-auto rounded-xl border bg-gray-200 p-4">
+            Oops. Something went wrong. Please check comments in &nbsp;
+            <code className="font-mono font-bold">
+              src/app/products/page.tsx
+            </code>{" "}
+            or open an issue on{" "}
+            <a
+              href="https://github.com/Occtoo/create-occtoo-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github.
+            </a>
+          </p>
+        </div>
+      </div>
+    );
 
   return (
     <div className={`${isLoading ? "opacity-50" : ""}`}>
@@ -153,9 +185,11 @@ export default function ProductList({
           </Button>
         </div>
       )}
-      <div className="text-muted-foreground text-sm py-3">
-        {data?.total} products
-      </div>
+      {data?.total && (
+        <div className="text-muted-foreground text-sm py-3">
+          {data?.total} products
+        </div>
+      )}
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {products?.map((p) => <ProductCard key={p.id} data={p} />)}
       </div>

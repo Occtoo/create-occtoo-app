@@ -2,14 +2,21 @@ import ReactQueryHydrate from "@/components/hydrate-client";
 import getQueryClient from "@/lib/get-query-client";
 import { dehydrate } from "@tanstack/react-query";
 import ProductList from "./components/ProductList";
-import {
-  DefaultService as OcctooDestinationClient,
-  type productsApiResponse,
-} from "@/generated";
 import ProductFilter from "./components/ProductFilter";
 import { type Metadata, type ResolvingMetadata } from "next";
 import { Suspense } from "react";
 import { PAGE_SIZE } from "./constants";
+
+/**
+ * Import client generated from OpenAPI schema
+ *
+ * If you used a different destination url than the default one when scaffolding this project,
+ * you should switch out the types here to fix any type errors.
+ */
+import {
+  DefaultService as OcctooDestinationClient,
+  type productsApiResponse,
+} from "@/generated";
 
 interface Props {
   searchParams: Record<string, string[]>;
@@ -43,6 +50,13 @@ export default async function Page({ searchParams }: Props) {
 
   // Fetch products - hydrate client with data from server
   const queryClient = getQueryClient();
+
+  /**
+   * Use the generated client to fetch products
+   *
+   * If you used a different destination url than the default one when scaffolding this project,
+   * you should switch out the client function here.
+   */
   await queryClient.prefetchQuery<productsApiResponse>({
     queryKey: ["products", page, filter],
     queryFn: () => {

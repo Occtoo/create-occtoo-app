@@ -4,6 +4,8 @@ import { Inter as FontSans } from "next/font/google";
 import Providers from "./providers";
 import { cn } from "@/lib/utils";
 import AppNavigation from "@/components/AppNavigation";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,12 +26,26 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "relative min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
         )}
       >
         <AppNavigation />
         <Providers>{children}</Providers>
+        <div className="absolute bottom-0 w-full flex items-center justify-center py-2">
+          <a href="https://occtoo.com" target="_blank" rel="noreferrer">
+            <Button variant="ghost" className="text-xs text-gray-700/70 h-7">
+              <Image
+                src="/occtoo.webp"
+                className="mr-1 -mt-0.5"
+                alt="logo"
+                width={15}
+                height={15}
+              />
+              Powered by Occtoo
+            </Button>
+          </a>
+        </div>
       </body>
     </html>
   );

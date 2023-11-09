@@ -1,9 +1,16 @@
 "use client";
 
-import { type productsApiResponse } from "@/generated";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+
+/**
+ * Import response type generated from OpenAPI schema
+ *
+ * If you used a different destination url than the default one when scaffolding this project,
+ * you should switch out the type here to fix any type errors.
+ */
+import { type productsApiResponse } from "@/generated";
 
 type Increment<A extends number[]> = [...A, 0];
 
@@ -26,6 +33,10 @@ interface IProductCard {
   data: Product;
 }
 
+/**
+ * If you used a different destination url than the default one when scaffolding this project,
+ * you should switch out the type above and update the client function below to fix any type errors.
+ */
 const ProductCard: React.FC<IProductCard> = ({ data }) => {
   const router = useRouter();
 
