@@ -169,7 +169,7 @@ export default function ProductList({
     );
 
   return (
-    <div className={`${isLoading ? "opacity-50" : ""}`}>
+    <div className={`pb-24 ${isLoading ? "opacity-50" : ""}`}>
       {hasPreviousPage() && (
         <div className="px-6 flex flex-col items-center justify-center">
           <Button
