@@ -4,8 +4,6 @@ This template provides a React+Typescript boilerplate with minimal setup using V
 
 **Docs:** https://docs.occtoo.com/
 
-![/public/docs/occtoo-plp.png](/public/docs/occtoo-plp.png)
-
 **Currently using these plugins:**
 
 - [react-query](https://github.com/TanStack/query#readme) for data fetching
